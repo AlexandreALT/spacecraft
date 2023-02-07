@@ -10,44 +10,50 @@ async function fetchData() {
 }
 
 export function useStarships() {
-    const { isLoading, isError, data, error } = useQuery({queryKey: ["starships"], queryFn: fetchData});
+  const { isLoading, isError, data, error } = useQuery({
+    queryKey: ["starships"],
+    queryFn: fetchData,
+  });
 
-    if (isLoading) {
-        return <Text>Loading...</Text>
-    }
+  if (isLoading) {
+    return <Text>Loading...</Text>;
+  }
 
-    if (isError) {
-        return <Text>Error: {error.message}</Text>
-    }
+  if (isError) {
+    return <Text>Error: {error.message}</Text>;
+  }
 
-    return (
-        <SafeAreaView style={styles.safeContainer}>
-            <FlatList
-                style={styles.container}
-                data={data.results}
-                renderItem={({item}) => <Item
-                props={{
-                    name: item.name,
-                    model: item.model,
-                    crew: item.crew,
-                    hyperdrive_rating: item.hyperdrive_rating,
-                    cost_in_credits: item.cost_in_credits
-                }} />}
-            />
-        </SafeAreaView>
-    );
+  return (
+    <SafeAreaView style={styles.safeContainer}>
+      <FlatList
+        style={styles.container}
+        data={data.results}
+        renderItem={({ item }) => (
+          <Item
+            props={{
+              name: item.name,
+              model: item.model,
+              crew: item.crew,
+              hyperdrive_rating: item.hyperdrive_rating,
+              cost_in_credits: item.cost_in_credits,
+            }}
+          />
+        )}
+      />
+    </SafeAreaView>
+  );
 }
 
 const styles = StyleSheet.create({
-    safeContainer: {
-      flex: 1,
-      marginTop: StatusBar.currentHeight || 0,
-    },
-    container: {
-      paddingHorizontal: 20,
-      marginTop: 20,
-    },
-    item: {
-        marginBottom: 20,
-    }
-  });
+  safeContainer: {
+    flex: 1,
+    marginTop: StatusBar.currentHeight || 0,
+  },
+  container: {
+    paddingHorizontal: 20,
+    marginTop: 20,
+  },
+  item: {
+    marginBottom: 20,
+  },
+});
