@@ -3,15 +3,11 @@ import { View, Image, ScrollView } from "react-native";
 import { Appbar, Text } from "react-native-paper";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 
-export const TermsScreen = () => {
-  function goBack() {
-    alert("goBack pressed!");
-  }
-
+export const TermsScreen = ({ navigation: { goBack } }) => {
   return (
     <SafeAreaProvider>
       <Appbar.Header>
-        <Appbar.BackAction onPress={goBack} />
+        <Appbar.BackAction onPress={() => goBack()} />
         <Appbar.Content title="Terms and Conditions" />
       </Appbar.Header>
       <ScrollView style={{ padding: 32 }}>

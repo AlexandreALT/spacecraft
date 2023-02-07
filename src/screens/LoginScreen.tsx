@@ -1,13 +1,24 @@
-import { StatusBar } from "expo-status-bar";
-import { Text, View, StyleSheet, Pressable } from "react-native";
+import {
+  Text,
+  View,
+  StyleSheet,
+  Pressable,
+  TouchableOpacity,
+} from "react-native";
 import Constants from "expo-constants";
 import { TextInput, Button } from "react-native-paper";
 import React, { useState } from "react";
-import { useTogglePasswordVisibility } from "../hooks/useTogglePasswordVisibility";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { Header } from "../components/Header";
 
-export default function App() {
+import { useTogglePasswordVisibility } from "../hooks/useTogglePasswordVisibility";
+import { Header } from "../components/Header";
+import { Routes } from "../navigation/Routes";
+
+export const LoginScreen = ({ navigation }) => {
+  function navigateToTerms() {
+    navigation.navigate(Routes.TERMS_SCREEN);
+  }
+
   const { passwordVisibility, rightIcon, handlePasswordVisibility } =
     useTogglePasswordVisibility();
   const [password, setPassword] = useState("");
@@ -16,7 +27,7 @@ export default function App() {
     <View style={styles.container}>
       <Header title="SPACECRAFT" />
       <View style={styles.content}>
-        <TextInput label="Email" style={styles.input}></TextInput>
+        <TextInput label="Email" style={styles.input} />
         <View style={styles.inputContainer}>
           <TextInput
             label="Password"
@@ -25,7 +36,7 @@ export default function App() {
             value={password}
             enablesReturnKeyAutomatically
             onChangeText={(text) => setPassword(text)}
-          ></TextInput>
+          />
           <Pressable onPress={handlePasswordVisibility}>
             <MaterialCommunityIcons
               name={rightIcon}
@@ -38,11 +49,13 @@ export default function App() {
         <Button style={styles.login} color="white">
           Login
         </Button>
-        <Text style={styles.readTerms}>Read terms and conditions.</Text>
+        <TouchableOpacity onPress={navigateToTerms}>
+          <Text style={styles.readTerms}>Read terms and conditions.</Text>
+        </TouchableOpacity>
       </View>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {

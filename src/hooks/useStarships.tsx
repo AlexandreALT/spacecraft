@@ -1,15 +1,16 @@
 ﻿import { useQuery } from "@tanstack/react-query";
 import { FlatList, SafeAreaView, StyleSheet, StatusBar } from "react-native";
 import { Text } from "react-native-paper";
+
 import { Item } from "../components/Item";
 
 async function fetchData() {
-  const result = await fetch(`https://swapi.py4e.com/api/starships/`);
+  const result = await fetch("https://swapi.py4e.com/api/starships/");
   const json = await result.json();
   return json;
 }
 
-export function useStarships() {
+export function useStarships(props) {
   const { isLoading, isError, data, error } = useQuery({
     queryKey: ["starships"],
     queryFn: fetchData,
@@ -34,8 +35,8 @@ export function useStarships() {
               name: item.name,
               model: item.model,
               crew: item.crew,
-              hyperdrive_rating: item.hyperdrive_rating,
-              cost_in_credits: item.cost_in_credits,
+              hyperdriveRating: item.hyperdrive_rating,
+              costInCredits: item.cost_in_credits,
             }}
           />
         )}
@@ -52,8 +53,5 @@ const styles = StyleSheet.create({
   container: {
     paddingHorizontal: 20,
     marginTop: 20,
-  },
-  item: {
-    marginBottom: 20,
   },
 });
