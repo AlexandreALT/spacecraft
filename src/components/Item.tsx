@@ -1,30 +1,24 @@
 ﻿import { useNavigation } from "@react-navigation/native";
 import { StyleSheet } from "react-native";
-import { Button, Card, Text } from "react-native-paper";
+import { Card, Text } from "react-native-paper";
 
 import { useImage } from "../hooks/useImage";
 
-type ItemProps = {
-  name: string;
-  model: string;
-  crew: string;
-  hyperdriveRating: string;
-  costInCredits: string;
-};
-
-export const Item = ({ props }: { props: ItemProps }) => {
+export const Item = ({ props }: { props }) => {
   const navigation = useNavigation();
 
   return (
-    <Card style={styles.container}>
+    <Card
+      style={styles.container}
+      onPress={() => navigation.navigate("Starship", { props: props })}
+    >
       <Card.Cover source={useImage(props.name)} />
       <Card.Title title={props.name} subtitle={props.model} />
       <Card.Content>
         <Text>{props.crew}</Text>
-        <Text>{props.hyperdriveRating}</Text>
-        <Text>{props.costInCredits}</Text>
+        <Text>{props.hyperdrive_rating}</Text>
+        <Text>{props.cost_in_credits}</Text>
       </Card.Content>
-      <Button onPress={() => navigation.navigate("Starship")}>ok</Button>
     </Card>
   );
 };
