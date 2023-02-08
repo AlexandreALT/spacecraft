@@ -46,7 +46,11 @@ export const LoginScreen = ({ navigation }) => {
             />
           </Pressable>
         </View>
-        <Button style={styles.login} color="white">
+        <Button
+          style={styles.login}
+          color="white"
+          onPress={() => navigation.navigate("Starships")}
+        >
           Login
         </Button>
         <TouchableOpacity onPress={navigateToTerms}>

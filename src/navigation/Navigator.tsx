@@ -12,7 +12,7 @@ export function Navigator() {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="Starships"
+        initialRouteName="Login"
         screenOptions={{ headerShown: false }}
       >
         <Stack.Screen name="Login" component={LoginScreen} />
